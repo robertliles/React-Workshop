@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import GuestBookInput from './GuestBookInput';
+import { connect } from 'react-redux';
 
 class App extends Component {
   state = {
@@ -35,7 +36,7 @@ class App extends Component {
         />
         <div>
           {entries.map(entry => {
-            <article>{entry}</article>
+            return <article>{entry}</article>
           })}
         </div>
       </div>
@@ -43,4 +44,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const ConnectedApp = connect(
+  function mapStateToProps(state) {
+    return {
+      messages: state.messages
+    }
+  }
+)(App);
+
+export default ConnectedApp;
